@@ -1,0 +1,193 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.mainPage {
+    padding-top: 8vh;
+    background-color: white;
+}
+
+/* Sticky Menu Bar */
+.s_menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #9a0707;
+    height: 7.5vh;
+    z-index: 1000;
+    padding: 4vh 0;
+    transition: top 0.15s ease; /* Smooth transition for hiding and showing */
+}
+
+div.side-menu-content {
+	font-family: 'Times New Roman', serif;
+}
+
+
+.sm_contents {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 1vw;
+    margin-top: -2.8vh;
+    position: relative;
+}
+
+.m_text {
+    font-family: 'Times New Roman', serif;
+    color: white;
+    font-size: 2.3rem;
+}
+
+.m_logout {
+    font-family: 'Times New Roman', serif;
+    color: white;
+    font-size: 1vw;
+    margin-left: 76vw;
+}
+
+.drawer-icon {
+    font-size: 1.7vw;
+    color: white;
+    cursor: pointer;
+    padding-right: 2.5vw;
+    padding-left: 2vw;
+}
+
+.drawer-icon:hover {
+    color: #ccc;
+}
+
+/* Search Bar */
+.search-container {
+    padding: 2vh 1vw;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar-wrapper {
+    position: relative;
+    width: 50%;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    border-radius: 20px;
+    border: 2px solid #ae3838;
+    outline: none;
+}
+
+.search-bar:focus {
+    border-color: #9a0707;
+    box-shadow: 0 2px 15px rgba(154, 7, 7, 0.5);
+}
+
+#m-glass {
+    position: absolute;
+    right: 1.5vw;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    color: #ae3838;
+    cursor: pointer;
+}
+
+/* Side Menu (Drawer) */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -18vw;
+    width: 18vw;
+    height: 100%;
+    background-color: #da9100;
+    color: white;
+    z-index: 999;
+    transition: left 0.35s ease-in-out;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.side-menu::-webkit-scrollbar {
+    display: none;
+}
+
+.side-menu.open {
+    left: 0;
+}
+
+.side-menu-content {
+    padding: 20px;
+    margin-top: 10vh; 
+}
+
+.side-menu-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.side-menu-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.side-menu-content p {
+    font-size: 1.2rem;
+}
+
+#s_logoc {
+	height: 100%;
+	width: 100%;
+}
+
+.side-menu-content table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 20px auto;
+}
+
+.content table {
+	width: 75%;
+	border-collapse: collapse;
+	margin: 20px auto;
+}
+
+.content th {
+	padding: 10px;
+	border: 2px solid #ae3838;
+}
+
+.content td {
+	padding: 10px;
+	border: 2px solid #ae3838;
+}
+
+.side-menu-content th, td {
+	padding: 10px;
+	border: 1px solid white;
+}
+
+th {
+	text-align: center;
+
+}
+
+td {
+	text-align: left;
+}
+
+tr#t_Data td {
+	text-align: center;
+}

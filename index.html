@@ -1,1 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libro Mini</title>
+    <link rel="icon" href="resources/img/icon_c2.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="mainPage">
+        <!-- Sticky Menu Bar -->
+        <div class="s_menu">
+            <div class="sm_contents">
+                <div class="drawer-icon" onclick="toggleDrawer()">&#9776;</div>
+                <div class="m_text">Libro Mini </div>
+                <div class="m_logout">Sign Out</div>
+            </div>
+        </div>
 
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="search-bar-wrapper">
+                <input type="text" class="search-bar" placeholder="   Search...">
+                <i class="fa-solid fa-magnifying-glass" id="m-glass"></i>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+        	<table>
+        		<thead>
+        			<tr>
+        				<th>Title</th>
+        				<th>Author</th>
+        				<th>Publication Year</th>
+        				<th>Genre</th>
+        				<th>ISBN</th>
+        				<th>Publisher</th>
+        				<th>Language</th>
+        				<th>Availability</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        			<tr>
+        				<td>The Great Gatsby</td>
+        				<td>F. Scott Fitzgerald</td>
+        				<td>1925</td>
+        				<td>Fiction</td>
+        				<td>9780743273565</td>
+        				<td>Charles Scribner's Sons</td>
+        				<td>English</td>
+        				<td>Available</td>
+        			</tr>
+        		</tbody>
+        		<tbody>
+        			<tr>
+        				<td>To Kill a Mockingbird</td>
+        				<td>Harper Lee</td>
+        				<td>1960</td>
+        				<td>Fiction</td>
+        				<td>9780061120084</td>
+        				<td>J.B. Lippincott & Co.</td>
+        				<td>English</td>
+        				<td>Not Available</td>
+        			</tr>
+        		</tbody>
+        		<tbody>
+        			<tr>
+        				<td>The Catcher in the Rye</td>
+        				<td>J.D. Salinger</td>
+        				<td>1951</td>
+        				<td>Fiction</td>
+        				<td>9780316769488</td>
+        				<td>Little, Brown and Company</td>
+        				<td>English</td>
+        				<td>Available</td>
+        			</tr>
+        		</tbody>
+        		<tbody>
+        			<tr>
+        				<td>Brave New World</td>
+        				<td>Aldous Huxley</td>
+        				<td>1932</td>
+        				<td>Dystopian</td>
+        				<td>9780060850524</td>
+        				<td>Chatto & Windus</td>
+        				<td>English</td>
+        				<td>Available</td>
+        			</tr>
+        		</tbody>
+        		<tbody>
+        			<tr>
+        				<td>Harry Potter and the Sorcerer's Stone</td>
+        				<td>J.K. Rowling</td>
+        				<td>1997</td>
+        				<td>Fantasy</td>
+        				<td>9780439708180</td>
+        				<td>Bloomsbury</td>
+        				<td>English</td>
+        				<td>Not Available</td>
+        			</tr>
+        		</tbody>
+        		<tbody>
+        			<tr>
+        				<td>Fahrenheit 451</td>
+        				<td>Ray Bradbury</td>
+        				<td>1953</td>
+        				<td>Science Fiction</td>
+        				<td>9781451673319</td>
+        				<td>Ballantine Books</td>
+        				<td>English</td>
+        				<td>Available</td>
+        			</tr>
+        		</tbody>
+        		<tbody>
+        			<tr>
+        				<td>The Hobbit</td>
+        				<td>J.R.R. Tolkien</td>
+        				<td>1937</td>
+        				<td>Fantasy</td>
+        				<td>9780345339683</td>
+        				<td>George Allen & Unwin</td>
+        				<td>English</td>
+        				<td>Not Available</td>
+        			</tr>
+        		</tbody>
+        		<tbody>
+        			<tr>
+        				<td>Pride and Prejudice</td>
+        				<td>Jane Austen</td>
+        				<td>1813</td>
+        				<td>Romance</td>
+        				<td>9780141439518</td>
+        				<td>T. Egerton</td>
+        				<td>English</td>
+        				<td>Available</td>
+        			</tr>
+        		</tbody>
+        		<tbody>
+        			<tr>
+        				<td>Catch-22</td>
+        				<td>Joseph Heller</td>
+        				<td>1961</td>
+        				<td>Satire</td>
+        				<td>9781451626650</td>
+        				<td>Simon & Schuster</td>
+        				<td>English</td>
+        				<td>Available</td>
+        			</tr>
+        		</tbody>
+        		<tbody>
+        			<tr>
+        				<td>The Da Vinci Code</td>
+        				<td>Dan Brown</td>
+        				<td>2003</td>
+        				<td>Mystery, Thriller</td>
+        				<td>9780307474278</td>
+        				<td>Doubleday</td>
+        				<td>English</td>
+        				<td>Available</td>
+        			</tr>
+        		</tbody>
+        		<tbody>
+        			<tr>
+        				<td>War and Peace</td>
+        				<td>Leo Tolstoy</td>
+        				<td>1869</td>
+        				<td>Historical Fiction</td>
+        				<td>9780307382910</td>
+        				<td>The Russian Messenger</td>
+        				<td>Russian</td>
+        				<td>Available</td>
+        			</tr>
+        		</tbody>
+        		<tbody>
+        			<tr>
+        				<td>The Shining</td>
+        				<td>Stephen King</td>
+        				<td>1977</td>
+        				<td>Horror</td>
+        				<td>9780307743657</td>
+        				<td>Doubleday</td>
+        				<td>English</td>
+        				<td>Available</td>
+        			</tr>
+        		</tbody>
+        		<tbody>
+        			<tr>
+        				<td>Dracula</td>
+        				<td>Bram Stoker</td>
+        				<td>1897</td>
+        				<td>Gothic Horror</td>
+        				<td>9780141439846</td>
+        				<td>Archibald Constable and Co.</td>
+        				<td>English</td>
+        				<td>Available</td>
+        			</tr>
+        		</tbody>
+        		<tbody>
+        			<tr>
+        				<td>Little Women</td>
+        				<td>Louisa May Alcott</td>
+        				<td>1868</td>
+        				<td>Fiction</td>
+        				<td>9780142407332</td>
+        				<td>Roberts Brothers</td>
+        				<td>English</td>
+        				<td>Available</td>
+        			</tr>
+        		</tbody>
+        	</table>
+        </div>
+    </div>
+
+    <!-- Side Menu (Drawer) -->
+    <div class="side-menu" id="sideMenu">
+        <div class="side-menu-content">
+        	<img id="s_logoc" src="resources/img/icon_ccat3.png">
+            <h2>Manuel Parco III</h2>
+            <h3>3rd Year</h3>
+
+            <table>
+            	<thead>
+            		<tr>
+            			<th colspan="3">Borrowed Books</th>
+            		</tr>
+            	</thead>
+            	<tbody>
+            		<tr id="t_Data">
+            			<td>Title:</td>
+            			<td>Year:</td>
+            			<td>Date Returned:</td>
+            		</tr>
+            	</tbody>
+            	<tbody>
+            		<tr>
+            			<td>The Great Gatsby</td>
+            			<td>1925</td>
+            			<td></td>
+            		</tr>
+            	</tbody>
+            	<tbody>
+            		<tr>
+            			<td>To Kill a Mockingbird</td>
+            			<td>1960</td>
+            			<td></td>
+            		</tr>
+            	</tbody>
+            	<tbody>
+            		<tr>
+            			<td>The Catcher in the Rye</td>
+            			<td>1951</td>
+            			<td></td>
+            		</tr>
+            	</tbody>
+            	<tbody>
+            		<tr>
+            			<td>Brave New World</td>
+            			<td>1932</td>
+            			<td></td>
+            		</tr>
+            	</tbody>
+            	<tbody>
+            		<tr>
+            			<td>Harry Potter and the Sorcerer's Stone</td>
+            			<td>1997</td>
+            			<td></td>
+            		</tr>
+            	</tbody>
+            	<tbody>
+            		<tr>
+            			<td>Pride and Prejudice</td>
+            			<td>1813</td>
+            			<td></td>
+            		</tr>
+            	</tbody>
+            	<tbody>
+            		<tr>
+            			<td>Catch-22</td>
+            			<td>1961</td>
+            			<td></td>
+            		</tr>
+            	</tbody>
+            	<tbody>
+            		<tr>
+            			<td>The Hobbit</td>
+            			<td>1937</td>
+            			<td></td>
+            		</tr>
+            	</tbody>
+            	<tbody>
+            		<tr>
+            			<td>The Da Vinci Code</td>
+            			<td>2003</td>
+            			<td></td>
+            		</tr>
+            	</tbody>
+            	<tbody>
+            		<tr>
+            			<td>Fahrenheit 451</td>
+            			<td>1953</td>
+            			<td></td>
+            		</tr>
+            	</tbody>
+            	<tbody>
+            		<tr>
+            			<td>War and Peace</td>
+            			<td>1869</td>
+            			<td></td>
+            		</tr>
+            	</tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
