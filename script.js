@@ -18,7 +18,8 @@ window.addEventListener('scroll', function() {
 });
 
 function toggleDrawer() {
-    // You can add functionality to toggle a drawer menu here
-    alert("Drawer icon clicked!");
+    const sideMenu = document.getElementById('sideMenu');
+    sideMenu.classList.toggle('open'); // Toggle the "open" class to show/hide the menu
 }
+
 

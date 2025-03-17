@@ -13,22 +13,35 @@
     <div class="mainPage">
         <!-- Sticky Menu Bar -->
         <div class="s_menu">
-            <!-- Contents -->
             <div class="sm_contents">
-            	<!-- Drawer Icon -->
                 <div class="drawer-icon" onclick="toggleDrawer()">&#9776;</div>
-                <div class="m_text">Libro Mini <i class="fa-solid fa-magnifying-glass" id="m-glass"></i> </div>
+                <div class="m_text">Libro Mini </div>
                 <div class="m_logout">Sign Out</div>
             </div>
         </div>
 
         <!-- Search Bar -->
         <div class="search-container">
-            <input type="text" class="search-bar" placeholder="  Search...">
+            <div class="search-bar-wrapper">
+                <input type="text" class="search-bar" placeholder="   Search...">
+                <i class="fa-solid fa-magnifying-glass" id="m-glass"></i>
+            </div>
         </div>
-        
+
+        <!-- Content -->
         <div class="content">
             <p>This is some content below the sticky menu bar. Scroll to see the effect.</p>
+        </div>
+    </div>
+
+    <!-- Side Menu (Drawer) -->
+    <div class="side-menu" id="sideMenu">
+        <div class="side-menu-content">
+        	<img id="s_logoc" src="resources/img/icon_ccat3.png">
+            <h2>Manuel Parco III</h2>
+            <h3>3rd Year</h3>
+            <p>More user details can go here...</p>
+            <p>Example: Name, Email, Profile Picture, etc.</p>
         </div>
     </div>
 
