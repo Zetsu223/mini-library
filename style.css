@@ -1,0 +1,89 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.mainPage {
+    padding-top: 8vh;
+    background-color: #ae3838;
+
+/* Sticky Menu Bar */
+.s_menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #9a0707;
+    height: 7.5vh;
+    z-index: 1000;
+    padding: 4vh 0;
+    transition: top 0.15s ease; /* Smooth transition for hiding and showing */
+}
+
+.sm_contents {
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    justify-content: flex-start; /* Align to the left */
+    padding-left: 1vw;
+    margin-top: -2.8vh;
+    position: relative; /* Allow positioning of the drawer icon */
+}
+
+.m_text {
+    font-family: 'Times New Roman', serif;
+    color: white;
+    font-size: 2.3rem;
+}
+
+.m_logout {
+    font-family: 'Times New Roman', serif;
+    color: white;
+    font-size: 1vw;
+    margin-left: 76vw;
+}
+
+.drawer-icon {
+    font-size: 1.7vw;
+    color: white;
+    cursor: pointer;
+    padding-right: 2.5vw;
+    padding-left: 2vw;
+}
+
+.drawer-icon:hover {
+    color: #ccc; /* Slight color change on hover */
+}
+
+/* Search Bar Style */
+.search-container {
+    padding: 2vh 1vw;
+    background-color: #ae3838;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar {
+    width: 60%; /* Adjust width as necessary */
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    border-radius: 20px ;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.search-bar:focus {
+    border-color: #9a0707; /* Change border color when focused */
+    box-shadow: 0 0 5px rgba(154, 7, 7, 0.5);
+}
+
+/* Content below the sticky bar */
+.content {
+    padding-bottom: 2vh;
+    height: 2000px; /* Add enough height to make the page scrollable */
+}

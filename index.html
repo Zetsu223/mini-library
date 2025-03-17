@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libro Mini</title>
+    <link rel="icon" href="resources/img/icon_c2.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="mainPage">
+        <!-- Sticky Menu Bar -->
+        <div class="s_menu">
+            <!-- Contents -->
+            <div class="sm_contents">
+            	<!-- Drawer Icon -->
+                <div class="drawer-icon" onclick="toggleDrawer()">&#9776;</div>
+                <div class="m_text">Libro Mini <i class="fa-solid fa-magnifying-glass" id="m-glass"></i> </div>
+                <div class="m_logout">Sign Out</div>
+            </div>
+        </div>
 
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="  Search...">
+        </div>
+        
+        <div class="content">
+            <p>This is some content below the sticky menu bar. Scroll to see the effect.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
