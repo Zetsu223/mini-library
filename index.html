@@ -14,7 +14,7 @@
         <!-- Sticky Menu Bar -->
         <div class="s_menu">
             <div class="sm_contents">
-                <div class="drawer-icon" onclick="toggleDrawer()">&#9776;</div>
+                <div class="drawer-icon" onclick="toggleDrawer()"><div class="draw-ico">&#9776;</div></div>
                 <div class="m_text">Libro Mini </div>
                 <div class="m_logout">Sign Out</div>
             </div>
@@ -23,14 +23,17 @@
         <!-- Search Bar -->
         <div class="search-container">
             <div class="search-bar-wrapper">
-                <input type="text" class="search-bar" placeholder="   Search...">
-                <i class="fa-solid fa-magnifying-glass" id="m-glass"></i>
+                <input type="text" class="search-bar" placeholder="Search Books..">
+                <div class="fill"><i class="fa-solid fa-magnifying-glass" id="m-glass"></i></div>
+            </div>
+            <div class="search_button_wrapper">
+                <div class="searchButton" id="search_button" onclick="toggleSearch()">Search Books</div>
             </div>
         </div>
 
         <!-- Content -->
         <div class="content">
-        	<table>
+        	<table id="bookTable">
         		<thead>
         			<tr>
         				<th>Title</th>
@@ -52,7 +55,7 @@
         				<td>9780743273565</td>
         				<td>Charles Scribner's Sons</td>
         				<td>English</td>
-        				<td>Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability('The Great Gatsby')">Check Availability</div></td>
         			</tr>
         		</tbody>
         		<tbody>
@@ -64,7 +67,7 @@
         				<td>9780061120084</td>
         				<td>J.B. Lippincott & Co.</td>
         				<td>English</td>
-        				<td>Not Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability('To Kill a Mockingbird')">Check Availability</div></td>
         			</tr>
         		</tbody>
         		<tbody>
@@ -76,7 +79,7 @@
         				<td>9780316769488</td>
         				<td>Little, Brown and Company</td>
         				<td>English</td>
-        				<td>Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability()">Check Availability</div></td>
         			</tr>
         		</tbody>
         		<tbody>
@@ -88,7 +91,7 @@
         				<td>9780060850524</td>
         				<td>Chatto & Windus</td>
         				<td>English</td>
-        				<td>Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability()">Check Availability</div></td>
         			</tr>
         		</tbody>
         		<tbody>
@@ -100,7 +103,7 @@
         				<td>9780439708180</td>
         				<td>Bloomsbury</td>
         				<td>English</td>
-        				<td>Not Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability()">Check Availability</div></td>
         			</tr>
         		</tbody>
         		<tbody>
@@ -112,7 +115,7 @@
         				<td>9781451673319</td>
         				<td>Ballantine Books</td>
         				<td>English</td>
-        				<td>Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability()">Check Availability</div></td>
         			</tr>
         		</tbody>
         		<tbody>
@@ -124,7 +127,7 @@
         				<td>9780345339683</td>
         				<td>George Allen & Unwin</td>
         				<td>English</td>
-        				<td>Not Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability()">Check Availability</div></td>
         			</tr>
         		</tbody>
         		<tbody>
@@ -136,7 +139,7 @@
         				<td>9780141439518</td>
         				<td>T. Egerton</td>
         				<td>English</td>
-        				<td>Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability()">Check Availability</div></td>
         			</tr>
         		</tbody>
         		<tbody>
@@ -148,7 +151,7 @@
         				<td>9781451626650</td>
         				<td>Simon & Schuster</td>
         				<td>English</td>
-        				<td>Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability()">Check Availability</div></td>
         			</tr>
         		</tbody>
         		<tbody>
@@ -160,7 +163,7 @@
         				<td>9780307474278</td>
         				<td>Doubleday</td>
         				<td>English</td>
-        				<td>Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability()">Check Availability</div></td>
         			</tr>
         		</tbody>
         		<tbody>
@@ -172,7 +175,7 @@
         				<td>9780307382910</td>
         				<td>The Russian Messenger</td>
         				<td>Russian</td>
-        				<td>Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability()">Check Availability</div></td>
         			</tr>
         		</tbody>
         		<tbody>
@@ -184,7 +187,7 @@
         				<td>9780307743657</td>
         				<td>Doubleday</td>
         				<td>English</td>
-        				<td>Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability()">Check Availability</div></td>
         			</tr>
         		</tbody>
         		<tbody>
@@ -196,7 +199,7 @@
         				<td>9780141439846</td>
         				<td>Archibald Constable and Co.</td>
         				<td>English</td>
-        				<td>Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability()">Check Availability</div></td>
         			</tr>
         		</tbody>
         		<tbody>
@@ -208,9 +211,14 @@
         				<td>9780142407332</td>
         				<td>Roberts Brothers</td>
         				<td>English</td>
-        				<td>Available</td>
+        				<td><div class="t_button" onclick="checkBookAvailability()">Check Availability</div></td>
         			</tr>
         		</tbody>
+                <tbody>
+                    <tr>
+                        <td colspan="8" id="tEnd"> **Nothing Follows**</td>
+                    </tr>
+                </tbody>
         	</table>
         </div>
     </div>
@@ -218,7 +226,9 @@
     <!-- Side Menu (Drawer) -->
     <div class="side-menu" id="sideMenu">
         <div class="side-menu-content">
-        	<img id="s_logoc" src="resources/img/icon_ccat3.png">
+            <div class="d_logo">
+                <img id="s_logoc" src="resources/img/icon_ccat3.png" oncontextmenu="return false;" draggable="false">
+            </div>
             <h2>Manuel Parco III</h2>
             <h3>3rd Year</h3>
 
@@ -270,48 +280,11 @@
             			<td></td>
             		</tr>
             	</tbody>
-            	<tbody>
-            		<tr>
-            			<td>Pride and Prejudice</td>
-            			<td>1813</td>
-            			<td></td>
-            		</tr>
-            	</tbody>
-            	<tbody>
-            		<tr>
-            			<td>Catch-22</td>
-            			<td>1961</td>
-            			<td></td>
-            		</tr>
-            	</tbody>
-            	<tbody>
-            		<tr>
-            			<td>The Hobbit</td>
-            			<td>1937</td>
-            			<td></td>
-            		</tr>
-            	</tbody>
-            	<tbody>
-            		<tr>
-            			<td>The Da Vinci Code</td>
-            			<td>2003</td>
-            			<td></td>
-            		</tr>
-            	</tbody>
-            	<tbody>
-            		<tr>
-            			<td>Fahrenheit 451</td>
-            			<td>1953</td>
-            			<td></td>
-            		</tr>
-            	</tbody>
-            	<tbody>
-            		<tr>
-            			<td>War and Peace</td>
-            			<td>1869</td>
-            			<td></td>
-            		</tr>
-            	</tbody>
+                <tbody>
+                    <tr>
+                        <td colspan="3" id="tEnd"> **Nothing Follows**</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
