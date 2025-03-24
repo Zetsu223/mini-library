@@ -48,34 +48,118 @@ function toggleSearch() {
     }, 700);
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    fetchBooks();
+});
 
-// Function to check book availability based on the title passed
-function checkBookAvailability(bookTitle) {
-    const table = document.getElementById('bookTable');
-    const rows = table.getElementsByTagName('tr');
+// Fetch books and dynamically update table
+async function fetchBooks() {
+    try {
+        const response = await fetch("http://localhost:5000/books");
+        const books = await response.json();
 
-    for (let i = 1; i < rows.length; i++) { // Start at 1 to skip the header row
-        const cells = rows[i].getElementsByTagName('td');
-        
-        // Check if the title matches the bookTitle
-        if (cells[0].textContent.toLowerCase() === bookTitle.toLowerCase()) {
-            // Check the availability (last column in the row)
-            const availability = cells[7].textContent.trim();
-            
-            // Display the availability
-            if (availability === 'Available') {
-                alert(`${bookTitle} is available.`);
-            } else {
-                alert(`${bookTitle} is not available.`);
-            }
-            
-            return; // Stop the function once the book is found
+        const bookTableBody = document.querySelector("#bookTable tbody");
+        bookTableBody.innerHTML = ""; // Clear table before adding new data
+
+        books.forEach(book => {
+            const row = document.createElement("tr");
+
+            // Set button color based on availability
+            const buttonColor = book.available ? "green" : "red";
+            const buttonText = book.available ? "Available" : "Unavailable";
+
+            row.innerHTML = `
+                <td>${book.title || "N/A"}</td>
+                <td>${book.author || "N/A"}</td>
+                <td>${book.year || "N/A"}</td>
+                <td>${book.genre || "N/A"}</td>
+                <td>${book.isbn || "N/A"}</td>
+                <td>${book.publisher || "N/A"}</td>
+                <td>${book.language || "N/A"}</td>
+                <td>
+                    <div class="t_button" 
+                         onclick="checkBookAvailability('${book.title}', ${book.available})"
+                         style="background-color: ${buttonColor}; color: white; cursor: pointer;">
+                        ${buttonText}
+                    </div>
+                </td>
+            `;
+
+            bookTableBody.appendChild(row);
+        });
+
+    } catch (error) {
+        console.error("Error fetching books:", error);
+    }
+}
+
+//Function to check book availability
+function checkBookAvailability(title, isAvailable) {
+    alert(`${title} is ${isAvailable ? "available" : "not available"} for borrowing.`);
+}
+
+document.getElementById("searchButton").addEventListener("click", filterBooks);
+document.getElementById("searchInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        filterBooks();
+    }
+});
+
+function filterBooks() {
+    let searchInput = document.getElementById("searchInput").value.toLowerCase();
+    let tableRows = document.querySelectorAll("#bookTable tbody tr");
+
+    tableRows.forEach(row => {
+        let title = row.cells[0]?.textContent.toLowerCase() || "";
+        let author = row.cells[1]?.textContent.toLowerCase() || "";
+        let pubyear = row.cells[2]?.textContent.toLowerCase() || "";
+        let genre = row.cells[3]?.textContent.toLowerCase() || "";
+        let isbn = row.cells[4]?.textContent.toLowerCase() || "";
+
+        if (title.includes(searchInput) || author.includes(searchInput) || genre.includes(searchInput) || pubyear.includes(searchInput) || isbn.includes(searchInput)) {
+            row.style.display = ""; // Show row
+        } else {
+            row.style.display = "none"; // Hide row
         }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+    let userNameElement = document.getElementById("userName");
+
+    if (!localStorage.getItem("token")) {
+        userNameElement.innerHTML = `<h2>Guest</h2>`;
+        return;
     }
 
-    // If the book is not found
-    alert('Book not found');
-}
+    try {
+        let response = await fetch("http://localhost:5000/users/current", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}` 
+            }
+        });
+
+        let data = await response.json();
+
+        if (response.ok) {
+            userNameElement.innerHTML = `<h2>${data.name}</h2>`;
+        } else {
+            userNameElement.innerHTML = `<h2>Guest</h2>`;
+        }
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+        userNameElement.innerHTML = `<h2>Error loading user</h2>`;
+    }
+});
+
+document.getElementById("i_logout").addEventListener("click", function () {
+    localStorage.removeItem("token");
+    window.location.href = "login.html"; // Redirect to login
+});
+
+
 
 
 
