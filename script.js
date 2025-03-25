@@ -66,7 +66,7 @@ async function fetchBooks() {
 
             // Set button color based on availability
             const buttonColor = book.available ? "green" : "red";
-            const buttonText = book.available ? "Available" : "Unavailable";
+            const buttonText = book.available ? "Available" : "Not Available";
 
             row.innerHTML = `
                 <td>${book.title || "N/A"}</td>
@@ -78,12 +78,13 @@ async function fetchBooks() {
                 <td>${book.language || "N/A"}</td>
                 <td>
                     <div class="t_button" 
-                         onclick="checkBookAvailability('${book.title}', ${book.available})"
-                         style="background-color: ${buttonColor}; color: white; cursor: pointer;">
-                        ${buttonText}
+                         onclick="openBookModal('${book.title}', '${book.author}', '${book.year}', '${book.genre}', '${book.isbn}', ${book.available}, '${book.cover || ''}')"
+                         style="background-color: ${book.available ? 'green' : '#D2042D'}; color: white; cursor: pointer;">
+                        ${book.available ? "Available" : "Not Available"}
                     </div>
                 </td>
             `;
+
 
             bookTableBody.appendChild(row);
         });
@@ -158,6 +159,69 @@ document.getElementById("i_logout").addEventListener("click", function () {
     localStorage.removeItem("token");
     window.location.href = "login.html"; // Redirect to login
 });
+
+/* MODAL LOGIC */
+
+function openBookModal(title, author, year, genre, isbn, available, cover) {
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalAuthor").innerText = author;
+    document.getElementById("modalYear").innerText = year;
+    document.getElementById("modalGenre").innerText = genre;
+    document.getElementById("modalISBN").innerText = isbn;
+
+    // Set cover image (fallback to default if missing)
+    const modalCover = document.getElementById("modalCover");
+    modalCover.src = cover && cover !== "undefined" ? cover : "default-cover.jpg";
+
+    const borrowSection = document.getElementById("borrowSection");
+    borrowSection.innerHTML = ""; // Clear previous content
+
+    if (available) {
+        if (localStorage.getItem("token")) {
+            borrowSection.innerHTML = `<button class="borrow-btn" onclick="borrowBook('${title}', '${isbn}')">Borrow Book</button>`;
+        } else {
+            borrowSection.innerHTML = `<p style="color: red;">Login to borrow this book.</p>`;
+        }
+    } else {
+        borrowSection.innerHTML = `<p style="color: #FF3131;">This book is currently unavailable.</p>`;
+    }
+
+    // Show the modal
+    document.getElementById("bookModal").style.display = "flex";
+}
+
+// Function to close the modal
+function closeBookModal() {
+    document.getElementById("bookModal").style.display = "none";
+}
+
+
+// Function to borrow the book
+async function borrowBook(title, isbn) {
+    try {
+        let response = await fetch("http://localhost:5000/borrow", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify({ title, isbn })
+        });
+
+        let result = await response.json();
+
+        if (response.ok) {
+            alert("You have successfully borrowed the book!");
+            closeBookModal();
+        } else {
+            alert(result.message || "Error borrowing book.");
+        }
+    } catch (error) {
+        console.error("Error borrowing book:", error);
+    }
+}
+
+
 
 
 

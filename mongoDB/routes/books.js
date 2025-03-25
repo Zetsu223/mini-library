@@ -9,11 +9,15 @@ router.get("/", async (req, res) => {
     try {
         const db = await connectDB();
         const books = await db.collection("books").find().toArray();
+        
+        console.log("📚 Books from DB:", books); // Debugging log
         res.json(books);
     } catch (error) {
+        console.error("❌ Error fetching books:", error);
         res.status(500).json({ message: "Error fetching books", error });
     }
 });
+
 
 // ADD a New Book
 router.post("/", async (req, res) => {
