@@ -1,5 +1,6 @@
 const { MongoClient } = require("mongodb");
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 require("dotenv").config();
 
 const uri = process.env.MONGO_URI;
@@ -13,9 +14,21 @@ async function createUser() {
         const db = client.db(dbName);
         const usersCollection = db.collection(collectionName);
 
+        // Generate unique user ID
+        const userId = crypto.randomUUID();
+
         // Hash password
-        const hashedPassword = await bcrypt.hash("password123", 10);
-        const newUser = { name: "Admin User", username: "admin", email: "admin@libromini.com", password: hashedPassword, borrowedBooks: [] };
+        const hashedPassword = await bcrypt.hash("admin123", 10);
+
+        // New user object
+        const newUser = {
+            userId,
+            name: "Admin",
+            username: "admin",
+            email: "admin@libromini.com",
+            password: hashedPassword,
+            borrowedBooks: []
+        };
 
         await usersCollection.insertOne(newUser);
         console.log("User Created Successfully!");

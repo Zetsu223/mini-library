@@ -1,3 +1,4 @@
 # Ignore all `.env` files (for environment variables)
 .env
 .json
+node_modules/

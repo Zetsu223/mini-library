@@ -11,19 +11,20 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
             body: JSON.stringify({ username, password })
         });
 
-        let data = await response.json();
-
+        // Check if the response is okay (status 200-299)
         if (response.ok) {
-            // Store the JWT token in localStorage
-            localStorage.setItem("token", data.token);
+            let data = await response.json();
 
-            alert("Login successful! Welcome, " + data.user.name);
+            // Store both token and userId
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("userId", data.user.userId); // Store userId here
             window.location.href = "index.html"; // Redirect to dashboard
         } else {
-            errorMessage.textContent = data.message;
+            let data = await response.json();
+            errorMessage.textContent = data.message; // Show error message
         }
     } catch (error) {
-        errorMessage.textContent = "Server error. Please try again later.";
+        errorMessage.textContent = "Server error. Please try again later."; // Catch any network error
     }
 });
 

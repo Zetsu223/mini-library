@@ -1,13 +1,14 @@
-const bcrypt = require("bcryptjs");
+const { ObjectId } = require("mongodb"); // Import ObjectId from MongoDB
 
 class User {
     constructor(name, yearlvl, username, email, password, borrowedBooks = []) {
-        this.name = name;           // Full name
-        this.yearlvl = yearlvl;     // Year Level
-        this.username = username;   // Unique Username
-        this.email = email;         // Email
-        this.password = this.hashPassword(password); // Hashed Password
-        this.borrowedBooks = borrowedBooks; // List of borrowed books
+        this._id = new ObjectId();  // Generate a new MongoDB ObjectId for _id field
+        this.name = name;
+        this.yearlvl = yearlvl;
+        this.username = username;
+        this.email = email;
+        this.password = this.hashPassword(password);
+        this.borrowedBooks = borrowedBooks;
     }
 
     // Method to hash password

@@ -64,59 +64,26 @@
             <div id="userName"></div>
             <h3>3rd Year</h3>
 
-            <table>
-            	<thead>
-            		<tr>
-            			<th colspan="3">Borrowed Books</th>
-            		</tr>
-            	</thead>
-            	<tbody>
-            		<tr id="t_Data">
-            			<td>Title:</td>
-            			<td>Year:</td>
-            			<td>Date Returned:</td>
-            		</tr>
-            	</tbody>
-            	<tbody>
-            		<tr>
-            			<td>The Great Gatsby</td>
-            			<td>1925</td>
-            			<td></td>
-            		</tr>
-            	</tbody>
-            	<tbody>
-            		<tr>
-            			<td>To Kill a Mockingbird</td>
-            			<td>1960</td>
-            			<td></td>
-            		</tr>
-            	</tbody>
-            	<tbody>
-            		<tr>
-            			<td>The Catcher in the Rye</td>
-            			<td>1951</td>
-            			<td></td>
-            		</tr>
-            	</tbody>
-            	<tbody>
-            		<tr>
-            			<td>Brave New World</td>
-            			<td>1932</td>
-            			<td></td>
-            		</tr>
-            	</tbody>
-            	<tbody>
-            		<tr>
-            			<td>Harry Potter and the Sorcerer's Stone</td>
-            			<td>1997</td>
-            			<td></td>
-            		</tr>
-            	</tbody>
-                <tbody>
+            <table id="borrowedBooksTable">
+                <thead>
                     <tr>
-                        <td colspan="3" id="tEnd"> **Nothing Follows**</td>
+                        <th colspan="4">Borrowed Books</th>
                     </tr>
+                    <tr>
+                        <th>Title</th>
+                        <th>Genre</th>
+                        <th>Borrowed At</th>
+                        <th>Returned At</th>
+                    </tr>
+                </thead>
+                <tbody id="t_Data"> 
+                    <!-- Borrowed books will be dynamically inserted here -->
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" id="tEnd">**Nothing Follows**</td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -126,9 +93,9 @@
 
     <!-- Book Details Modal -->
     <div id="bookModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeBookModal()">&times;</span>
-            <img id="modalCover" src="default-cover.jpg" alt="Book Cover" class="book-cover">
+        <div class="modal-content" draggable="false">
+            <span class="close-btn" draggable="false" onclick="closeBookModal()">&times;</span>
+            <img oncontextmenu="return false;" id="modalCover" alt="Book Cover" class="book-cover" draggable="false">
             <h2 id="modalTitle">Book Title</h2>
             <p><strong>Author:</strong> <span class="modal_sp" id="modalAuthor"></span></p>
             <p><strong>Year:</strong> <span class="modal_sp" id="modalYear"></span></p>

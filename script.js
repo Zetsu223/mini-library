@@ -1,6 +1,5 @@
 let lastScrollTop = 0; // To keep track of the last scroll position
 
-
 // Add event listener for the scroll event
 window.addEventListener('scroll', function() {
     let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
@@ -178,12 +177,12 @@ function openBookModal(title, author, year, genre, isbn, available, cover) {
 
     if (available) {
         if (localStorage.getItem("token")) {
-            borrowSection.innerHTML = `<button class="borrow-btn" onclick="borrowBook('${title}', '${isbn}')">Borrow Book</button>`;
+            borrowSection.innerHTML = `<button class="borrow-btn" onclick="borrowBook('${title}', '${genre}')">Borrow Book</button>`;
         } else {
             borrowSection.innerHTML = `<p style="color: red;">Login to borrow this book.</p>`;
         }
     } else {
-        borrowSection.innerHTML = `<p style="color: #FF3131;">This book is currently unavailable.</p>`;
+        borrowSection.innerHTML = `<p style="color: red;">This book is currently unavailable.</p>`;
     }
 
     // Show the modal
@@ -195,36 +194,143 @@ function closeBookModal() {
     document.getElementById("bookModal").style.display = "none";
 }
 
+function borrowBook(title, genre) {
+    const userId = getUserIdFromToken(); // Extract userId from the token
 
-// Function to borrow the book
-async function borrowBook(title, isbn) {
+    if (!userId) {
+        alert("Please log in to borrow a book.");
+        return;
+    }
+
+    // Get the token from localStorage
+    const token = localStorage.getItem("token");
+    if (!token) {
+        alert("Access denied, no token provided.");
+        return;
+    }
+
+    fetch("http://localhost:5000/books/borrow", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}` // Send the JWT token in the Authorization header
+        },
+        body: JSON.stringify({ title, genre, userId }) // Send the book details and userId
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message);
+            updateBorrowedBooks(); // Update the borrowed books table
+            closeBookModal(); // Close the modal after borrowing
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => console.error("Error:", error));
+}
+
+async function updateBorrowedBooks() {
+    const token = localStorage.getItem("token"); // Get token from localStorage
+
+    if (!token) {
+        console.error("No token found. Access Denied.");
+        return;
+    }
+
     try {
-        let response = await fetch("http://localhost:5000/borrow", {
-            method: "POST",
+        let response = await fetch("http://localhost:5000/users/current", {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("token")}`
-            },
-            body: JSON.stringify({ title, isbn })
+                "Authorization": `Bearer ${token}` // Send token in the Authorization header
+            }
         });
 
-        let result = await response.json();
+        let data = await response.json();
+        console.log("Fetched Data:", data); // Log the full data object to check if borrowedBooks exist
 
         if (response.ok) {
-            alert("You have successfully borrowed the book!");
-            closeBookModal();
+            const borrowedBooksTableBody = document.querySelector("#t_Data");
+
+            if (!borrowedBooksTableBody) {
+                console.error("Table body element #t_Data not found");
+                return;
+            }
+
+            borrowedBooksTableBody.innerHTML = ""; // Clear previous content
+
+            // Check if borrowedBooks is an array and not empty
+            if (!Array.isArray(data.borrowedBooks) || data.borrowedBooks.length === 0) {
+                borrowedBooksTableBody.innerHTML = "<tr><td colspan='4'>No borrowed books</td></tr>";
+            } else {
+                console.log("Borrowed Books Array:", data.borrowedBooks); // Log borrowedBooks to ensure it's populated
+
+                // Dynamically add borrowed books to the table
+                data.borrowedBooks.forEach(book => {
+                    const row = document.createElement("tr");
+
+                    // Use borrowedAt for the borrow date
+                    const borrowedDate = book.borrowedAt ? new Date(book.borrowedAt).toLocaleDateString() : "N/A";
+                    const returnedDate = book.returnedOn ? new Date(book.returnedOn).toLocaleDateString() : "Not returned";
+
+                    row.innerHTML = `
+                        <td>${book.title}</td>
+                        <td>${book.genre}</td>
+                        <td>${borrowedDate}</td>
+                        <td>${returnedDate}</td>
+                    `;
+
+                    borrowedBooksTableBody.appendChild(row); // Add the row to the table
+                });
+            }
         } else {
-            alert(result.message || "Error borrowing book.");
+            console.error("Failed to fetch user data:", data);
         }
     } catch (error) {
-        console.error("Error borrowing book:", error);
+        console.error("Error fetching user data:", error);
     }
 }
 
+function returnBook(title) {
+    const userId = localStorage.getItem("userId"); // Ensure user is logged in
 
+    if (!userId) {
+        alert("Please log in to return a book.");
+        return;
+    }
 
+    fetch("http://localhost:5000/books/return", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title, userId }), // Send title and userId to mark the book as returned
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message);
+            updateBorrowedBooks(); // Update the borrowed books table with the return date
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => console.error("Error:", error));
+}
 
+// Call this function when the page loads
+document.addEventListener("DOMContentLoaded", updateBorrowedBooks);
 
+function getUserIdFromToken() {
+    const token = localStorage.getItem("token"); // Get the token from localStorage
+    if (!token) {
+        return null;
+    }
 
+    const payload = token.split('.')[1]; // Get the payload part of the JWT
+    const decodedPayload = JSON.parse(atob(payload)); // Decode and parse the payload
 
+    return decodedPayload.id; // Assuming the userId is in the 'id' field of the token
+}
 
